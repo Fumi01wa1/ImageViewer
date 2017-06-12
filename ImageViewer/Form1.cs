@@ -25,7 +25,7 @@ namespace ImageViewer
         private int mScrPosX = 0;
         private int mScrPosY = 0;
 
-
+        //---------------------------------------------------------------------
         public Form1()
         {
             InitializeComponent();
@@ -37,11 +37,13 @@ namespace ImageViewer
             this.WindowState = FormWindowState.Maximized;
         }
 
+        //---------------------------------------------------------------------
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        //---------------------------------------------------------------------
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -71,6 +73,7 @@ namespace ImageViewer
             }
         }
 
+        //---------------------------------------------------------------------
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             if (this.mBitmap == null)
@@ -91,6 +94,7 @@ namespace ImageViewer
             
         }
 
+        //---------------------------------------------------------------------
         private void previousToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.mIdxShow > 0)
@@ -102,6 +106,7 @@ namespace ImageViewer
             }
         }
 
+        //---------------------------------------------------------------------
         private void nextToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.mIdxShow < this.mFileNames.Length-1)
@@ -113,6 +118,7 @@ namespace ImageViewer
             }
         }
 
+        //---------------------------------------------------------------------
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             this.mIsMouseDown = true;
@@ -124,11 +130,13 @@ namespace ImageViewer
             this.mScrPosY = this.panel1.AutoScrollPosition.Y;
         }
 
+        //---------------------------------------------------------------------
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             this.mIsMouseDown = false;
         }
 
+        //---------------------------------------------------------------------
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (this.mIsMouseDown == false) return;
@@ -144,6 +152,20 @@ namespace ImageViewer
             this.panel1.AutoScrollPosition = new Point(-this.panel1.AutoScrollPosition.X - diffX, -this.panel1.AutoScrollPosition.Y - diffY);
 
             this.pictureBox1.Invalidate();
+        }
+
+        //---------------------------------------------------------------------
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.Left:
+                    this.previousToolStripMenuItem_Click(sender, e);
+                    break;
+                case Keys.Right:
+                    this.nextToolStripMenuItem_Click(sender, e);
+                    break;
+            }
         }
     }
 }
