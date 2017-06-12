@@ -8,8 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Runtime.InteropServices;
+
 namespace ImageViewer
 {
+    [StructLayout(LayoutKind.Sequential, Pack = 4)]
+    public struct IMG24BITS
+    {
+        byte R;
+        byte G;
+        byte B;
+    }
+
     public partial class Form1 : Form
     {
         // member variables.
